@@ -67,14 +67,14 @@ As you can see in the example above, the more complex data types are actually co
 ```js
 "aDate": "2018-09-21T23:21:02.149Z"
 ```
-As we normally get in json for dates (and then sadly parse into a string), we now get (thanks to our `toJSON` function):
+As we normally get from `JSON.stringify()` for dates (and then sadly parse the string into a date), we now get (thanks to our `toJSON` function):
 ```js
 "aDate": {
   "___js-to-json-class___": "Date",
   "json": "2018-09-21T23:21:02.149Z"
 }
 ```
-Which our parser `fromJSON` function recognizes due to the special `___js-to-json-class___` notation and actually converts into a date object.
+Which our parser `fromJSON` function recognizes due to the special `___js-to-json-class___` notation and actually converts into a date object. There's another interesting notation there (`___js-to-json-reference___` and `___js-to-json-pointer___`) which deal with serialization of the circular reference in `aLoop`, but more on that later.
 
 As you can see, the higher level json protocol can be easily extended to support any number of higher level data types, which we can add as needed, but the most amazing thing is that actually **you** can add more data types if you like, without changing a single line of code in this library. Read on to learn how.
 
