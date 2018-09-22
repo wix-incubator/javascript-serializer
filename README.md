@@ -19,6 +19,7 @@ const originalObj = {
   aRegExp: /aaa/i,
   aError: new Error('message')
 };
+originalObj.aLoop = originalObj;
 
 const str = JSON.stringify(toJSON(originalObj), null, 2);
 console.log(str);
@@ -45,6 +46,10 @@ console.log(str);
 //       "message": "message",
 //       "stack": "Error: message\n    at ..."
 //     }
+//   },
+//   "___js-to-json-reference___": "REF_1",
+//   "aLoop": {
+//     "___js-to-json-pointer___": "REF_1"
 //   }
 // }
 
@@ -53,6 +58,7 @@ const newObj = fromJSON(JSON.parse(str));
 console.log(newObj.aDate.toUTCString()); //Fri, 21 Sep 2018 23:21:02 GMT
 console.log(newObj.aRegExp.test('_aaa_')); //true
 console.log(newObj.aError.toString()); //Error: message
+console.log(newObj === newObj.aLoop); //true
 ```
 
 ## How does it work?
