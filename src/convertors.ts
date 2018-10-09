@@ -1,4 +1,5 @@
 import { toObject, fromObject } from 'errio';
+import { addDataType } from './serializer';
 
 class SerializableError {
   constructor(public error, public options: any = {}) {}
@@ -19,7 +20,5 @@ class SerializableRegExp {
   }
 }
 
-export const convertors = [
-  { from: Error, to: SerializableError },
-  { from: RegExp, to: SerializableRegExp },
-];
+addDataType(SerializableError, Error);
+addDataType(SerializableRegExp, RegExp);
